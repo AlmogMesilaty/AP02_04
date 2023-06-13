@@ -20,7 +20,7 @@ public class ChatsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_chats);
 
         RecyclerView lstChats = findViewById(R.id.lstChats);
         // creates new adapter
