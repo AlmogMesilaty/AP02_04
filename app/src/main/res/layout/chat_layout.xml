@@ -6,7 +6,8 @@
     android:orientation="horizontal"
     android:paddingBottom="5dp"
     app:cardBackgroundColor="#FFFFFF"
-    android:layout_marginTop="2dp">
+    android:layout_marginTop="2dp"
+    android:id="@+id/cvChat">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

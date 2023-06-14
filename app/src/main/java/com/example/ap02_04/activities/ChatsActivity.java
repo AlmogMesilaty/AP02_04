@@ -1,6 +1,8 @@
 package com.example.ap02_04.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,11 +13,14 @@ import com.example.ap02_04.adapters.ChatsListAdapter;
 import com.example.ap02_04.entities.Chat;
 import com.example.ap02_04.entities.Message;
 import com.example.ap02_04.entities.User;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChatsActivity extends AppCompatActivity {
+
+    ChatsListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +29,23 @@ public class ChatsActivity extends AppCompatActivity {
 
         RecyclerView lstChats = findViewById(R.id.lstChats);
         // creates new adapter
-        final ChatsListAdapter adapter = new ChatsListAdapter(this);
+        adapter = new ChatsListAdapter(this);
         // link recycler view with its adapter
         lstChats.setAdapter(adapter);
         // making sure the element will appear in a linear form
         lstChats.setLayoutManager(new LinearLayoutManager(this));
+
+        ImageButton btnSettings = findViewById(R.id.btnSettings);
+        btnSettings.setOnClickListener(v -> {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        });
+
+        FloatingActionButton btnAdd = findViewById(R.id.btnAdd);
+        btnAdd.setOnClickListener(v -> {
+            Intent intent = new Intent(this, AddChatActivity.class);
+            startActivity(intent);
+        });
 
         User user1 = new User("aaa@gmail.com", "Alice", R.drawable.image1);
         User user2 = new User("bbb@gmail.com", "Bob", R.drawable.image2);
@@ -70,6 +87,7 @@ public class ChatsActivity extends AppCompatActivity {
 
         adapter.setChats(chats);
 
-
     }
+
+
 }
