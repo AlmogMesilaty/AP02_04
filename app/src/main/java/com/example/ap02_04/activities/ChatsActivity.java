@@ -52,7 +52,7 @@ public class ChatsActivity extends AppCompatActivity {
         chatsViewModel = new ViewModelProvider(this).get(ChatsViewModel.class);
 
         // observe and set adapter when live data is changed
-        chatsViewModel.get().observe(this, chats -> {
+        chatsViewModel.getChats().observe(this, chats -> {
             adapter.setChats(chats);
         });
 
