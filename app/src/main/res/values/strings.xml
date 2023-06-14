@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">WebChat</string>
+    <string name="hintSearch">Search</string>
+    <string name="settings_title">Settings</string>
+    <string name="add_chat_title">Add Chat</string>
+    <string name="BaseUrl">http://10.0.2.2:5000/api/</string>
 </resources>

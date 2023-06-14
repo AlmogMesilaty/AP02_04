@@ -2,6 +2,9 @@ package com.example.ap02_04.entities;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.example.ap02_04.converters.Converters;
 
 import java.util.List;
 
@@ -11,8 +14,10 @@ public class Chat {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
+    @TypeConverters(Converters.class)
     private List<User> users;
 
+    @TypeConverters(Converters.class)
     private List<Message> messages;
 
     public Chat(int id, List<User> users, List<Message> messages) {

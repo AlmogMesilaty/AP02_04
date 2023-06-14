@@ -2,6 +2,9 @@ package com.example.ap02_04.entities;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.example.ap02_04.converters.Converters;
 
 @Entity
 public class Message {
@@ -11,6 +14,7 @@ public class Message {
 
     private String created;
 
+    @TypeConverters(Converters.class)
     private User sender;
 
     private String content;
@@ -30,6 +34,7 @@ public class Message {
         return created;
     }
 
+    @TypeConverters(Converters.class)
     public User getSender() {
         return sender;
     }
