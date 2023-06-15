@@ -4,4 +4,19 @@
     <string name="settings_title">Settings</string>
     <string name="add_chat_title">Add Chat</string>
     <string name="BaseUrl">http://10.0.2.2:5000/api/</string>
+
+
+    <string name="sign_open_msg_01">welcome_back</string>
+    <string name="sign_open_msg_02">Don\'t have an account? Sign up</string>
+    <string name="sign_email_address">email_address</string>
+    <string name="sign_password">password</string>
+
+
+    <string name="welcome">Welcome</string>
+    <string name="email_address">Email address</string>
+    <string name="password">Password</string>
+    <string name="display_name">Display Name</string>
+
+
+
 </resources>

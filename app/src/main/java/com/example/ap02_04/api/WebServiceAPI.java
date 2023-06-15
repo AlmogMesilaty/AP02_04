@@ -15,6 +15,7 @@ import retrofit2.http.Path;
 
 public interface WebServiceAPI {
 
+
     @GET("Chats")
     Call<List<Chat>> getChats();
 
@@ -37,6 +38,10 @@ public interface WebServiceAPI {
     Call<Void> addUser(@Body User user);
 
     @GET("Users/{username}")
-    Call<User> getUser();
+    Call<User> getUser(@Path("username") String  username);
+
+    @POST("Tokens")
+    Call<String> getToken(@Body String username, String password);
+
 
 }
