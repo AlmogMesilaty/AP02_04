@@ -3,6 +3,7 @@ package com.example.ap02_04.api;
 import com.example.ap02_04.entities.Chat;
 import com.example.ap02_04.entities.Message;
 import com.example.ap02_04.entities.User;
+import com.example.ap02_04.entities.UserPass;
 
 import java.util.List;
 
@@ -41,7 +42,7 @@ public interface WebServiceAPI {
     Call<User> getUser(@Path("username") String  username);
 
     @POST("Tokens")
-    Call<String> getToken(@Body String username, String password);
+    Call<String> getToken(@Body UserPass userPass);
 
 
 }

@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignActivity"
-    android:background="@drawable/beach_background">
+    tools:context=".activities.SignActivity"
+    android:background="@drawable/landscape">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -37,8 +37,8 @@ public class MessagesActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        User user1 = new User("aaa@gmail.com", "Alice", R.drawable.image1);
-        User user2 = new User("bbb@gmail.com", "Bob", R.drawable.image2);
+        User user1 = new User("aaa@gmail.com","1234456789a", "Alice", R.drawable.image1);
+        User user2 = new User("bbb@gmail.com","1234456789a", "Bob", R.drawable.image2);
 
         Message msg1 = new Message(1, "13/06/2023", user1,"Hello!");
         Message msg2 = new Message(2, "13/06/2023", user2,"World");

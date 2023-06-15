@@ -1,5 +1,7 @@
 package com.example.ap02_04.api;
 
+import com.example.ap02_04.entities.UserPass;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,7 +31,7 @@ public class TokenAPI {
 
     public String getToken(String username, String password) {
 
-        Call<String> call = webServiceAPI.getToken(username, password);
+        Call<String> call = webServiceAPI.getToken(new UserPass(username, password));
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

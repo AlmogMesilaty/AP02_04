@@ -27,12 +27,12 @@ public class ChatsRepository {
         public ChatListData() {
             super();
 
-            User user1 = new User("aaa@gmail.com", "Alice", R.drawable.image1);
-            User user2 = new User("bbb@gmail.com", "Bob", R.drawable.image2);
-            User user3 = new User("ccc@gmail.com", "Carol", R.drawable.image3);
-            User user4 = new User("ddd@gmail.com", "Dan", R.drawable.image4);
-            User user5 = new User("eee@gmail.com", "Eran", R.drawable.image5);
-            User user6 = new User("fff@gmail.com", "Foxy", R.drawable.image6);
+            User user1 = new User("aaa@gmail.com", "1234456789a","Alice", R.drawable.image1);
+            User user2 = new User("bbb@gmail.com", "1234456789a","Bob", R.drawable.image2);
+            User user3 = new User("ccc@gmail.com","1234456789a", "Carol", R.drawable.image3);
+            User user4 = new User("ddd@gmail.com","1234456789a", "Dan", R.drawable.image4);
+            User user5 = new User("eee@gmail.com","1234456789a", "Eran", R.drawable.image5);
+            User user6 = new User("fff@gmail.com","1234456789a", "Foxy", R.drawable.image6);
             Message msg1 = new Message(1, "13/06/2023", user1,"Hello!");
             Message msg2 = new Message(2, "13/06/2023", user2,"World");
             Message msg3 = new Message(1, "13/06/2023", user3,"Hello!");
