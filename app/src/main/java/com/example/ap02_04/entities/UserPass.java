@@ -3,7 +3,6 @@ package com.example.ap02_04.entities;
 public class UserPass {
 
     private String username;
-
     private String password;
 
     public UserPass(String username, String password) {

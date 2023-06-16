@@ -1,5 +1,7 @@
 package com.example.ap02_04.api;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.ap02_04.entities.UserPass;
 
 import retrofit2.Call;
@@ -10,10 +12,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TokenAPI {
 
+    private MutableLiveData<String> tokenData;
+    //private TokenDao tokenDao
     Retrofit retrofit;
     WebServiceAPI webServiceAPI;
 
-    private String token;
 
     public TokenAPI() {
         // using builder to create retrofit object
@@ -29,21 +32,19 @@ public class TokenAPI {
     }
 
 
-    public String getToken(String username, String password) {
-
-        Call<String> call = webServiceAPI.getToken(new UserPass(username, password));
+    public void getToken(String username, String password) {
+        UserPass userPass = new UserPass(username, password);
+        Call<String> call = webServiceAPI.getToken(userPass);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                token = response.body();
+                new Thread(() -> {
+                    tokenData.postValue(response.body());
+                }).start();
             }
-
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
-            }
+            public void onFailure(Call<String> call, Throwable t) {}
         });
-        return token;
     }
-
 }
 
