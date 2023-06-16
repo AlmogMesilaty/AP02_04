@@ -63,7 +63,7 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.Chat
             final Chat current = chats.get(position);
             final User contact = current.getContact(currentUsername);
             holder.tvDisplayName.setText(contact.getDisplayName());
-            holder.ivProfilePic.setImageResource(contact.getProfilePic());
+            //holder.ivProfilePic.setImageResource(contact.getProfilePic());
             final Message lastMessage = current.getLastMessage();
             holder.tvLastMessage.setText(lastMessage.getContent());
             holder.tvCreated.setText(lastMessage.getCreated());

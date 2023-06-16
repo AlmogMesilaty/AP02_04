@@ -2,7 +2,9 @@ package com.example.ap02_04.api;
 
 import com.example.ap02_04.entities.Chat;
 import com.example.ap02_04.entities.Message;
+import com.example.ap02_04.entities.Token;
 import com.example.ap02_04.entities.User;
+import com.example.ap02_04.entities.UserNoId;
 import com.example.ap02_04.entities.UserPass;
 
 import java.util.List;
@@ -36,13 +38,13 @@ public interface WebServiceAPI {
     Call<List<Message>> getMessages();
 
     @POST("Users")
-    Call<Void> addUser(@Body User user);
+    Call<Void> addUser(@Body UserNoId user);
 
     @GET("Users/{username}")
     Call<User> getUser(@Path("username") String  username);
 
     @POST("Tokens")
-    Call<String> getToken(@Body UserPass userPass);
+    Call<Token> getToken(@Body UserPass userPass);
 
 
 }

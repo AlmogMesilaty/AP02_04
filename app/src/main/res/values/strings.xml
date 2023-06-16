@@ -7,7 +7,7 @@
 
 
     <string name="sign_open_msg_01">welcome_back</string>
-    <string name="sign_open_msg_02">Don\'t have an account? Sign up</string>
+    <string name="sign_open_msg_02">Don\'t have an account?</string>
     <string name="sign_email_address">email_address</string>
     <string name="sign_password">password</string>
 
@@ -16,7 +16,9 @@
     <string name="email_address">Email address</string>
     <string name="password">Password</string>
     <string name="display_name">Display Name</string>
-
+    <string name="login">Login</string>
+    <string name="RegPasswordHint">password</string>
+    <string name="RegUsernameHint">email@example.com</string>
 
 
 </resources>

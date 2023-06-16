@@ -1,12 +1,6 @@
 package com.example.ap02_04.entities;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
-@Entity
-public class User {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+public class UserNoId {
 
     private String username;
 
@@ -16,19 +10,11 @@ public class User {
 
     private String profilePic;
 
-    public User(String username,String password,String displayName, String profilePic) {
+    public UserNoId(String username,String password,String displayName, String profilePic) {
         this.username = username;
         this.password = password;
         this.displayName = displayName;
         this.profilePic = profilePic;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getUsername() {
@@ -41,7 +27,9 @@ public class User {
         return displayName;
     }
 
-    public String getProfilePic() { return profilePic; }
+    public String getProfilePic() {
+        return profilePic;
+    }
 
     public void setUsername(String username) {
         this.username = username;
