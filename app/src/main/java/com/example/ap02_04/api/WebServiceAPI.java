@@ -2,13 +2,13 @@ package com.example.ap02_04.api;
 
 import com.example.ap02_04.entities.Chat;
 import com.example.ap02_04.entities.Message;
-import com.example.ap02_04.entities.Token;
 import com.example.ap02_04.entities.User;
 import com.example.ap02_04.entities.UserNoId;
 import com.example.ap02_04.entities.UserPass;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -44,7 +44,7 @@ public interface WebServiceAPI {
     Call<User> getUser(@Path("username") String  username);
 
     @POST("Tokens")
-    Call<Token> getToken(@Body UserPass userPass);
+    Call<ResponseBody> getToken(@Body UserPass userPass);
 
 
 }

@@ -1,8 +1,8 @@
 package com.example.ap02_04.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -10,7 +10,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ap02_04.R;
+import com.example.ap02_04.api.ClientAPI;
+import com.example.ap02_04.entities.UserPass;
 import com.example.ap02_04.webservices.WebChat;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -38,47 +45,40 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin.setOnClickListener(v -> {
 
-            // extract text from edit text in the activity
-            WebChat.setUsername(etUsername.getText().toString());
-            WebChat.setPassword(etPassword.getText().toString());
-
-//            if (WebChat.getUsername() != "" && WebChat.getPassword() != "") {
-//                tokenAPI.getToken(this);
-//            }
-
+            if (TextUtils.isEmpty(etUsername.getText().toString()) || TextUtils.isEmpty(etPassword.getText().toString())) {
+                String message = "Enter username and password";
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            } else {
+                UserPass user = new UserPass(etUsername.getText().toString(), etPassword.getText().toString());
+                loginUser(user);
+            }
         });
 
 
     }
 
-//    public void login() {
-//
-//
-//        // login unsuccessful
-//        else {
-//            // print message to the screen
-//            Toast.makeText(LoginActivity.this, "Wrong username / password", Toast.LENGTH_SHORT).show();
-//            EditText userTemp = findViewById(R.id.username);
-//            userTemp.setText("");
-//            EditText passwordTemp = findViewById(R.id.password);
-//            passwordTemp.setText("");
-//        }
-//}
-
-    public static void handleLogin(Context context) {
-        if (WebChat.getToken() != null) {
-            // get logged in user details
-//            userAPI.getUser();
-            // print message to the screen on
-            Toast.makeText(context, "Login Successful", Toast.LENGTH_SHORT).show();
-//            // open chats activity
-//            Intent intent = new Intent(this, ChatsActivity.class);
-//            startActivity(intent);
-        }
+    public void loginUser(UserPass user) {
+        Call<ResponseBody> call = ClientAPI.getService().getToken(user);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    WebChat.setToken(response.body().toString());
+                    WebChat.setUsername(user.getUsername());
+                    String message = "Login successful!";
+                    Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(LoginActivity.this, ChatsActivity.class));
+                } else {
+                    String message = "An error occurred";
+                    Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                String message = t.getLocalizedMessage();
+                Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
-    public static void loginError(Context context) {
-        // print message to the screen
-        Toast.makeText(context, "Wrong username / password", Toast.LENGTH_SHORT).show();
-    }
 }
