@@ -1,4 +1,4 @@
-package com.example.ap02_04.repositories;
+package com.example.ap02_04.room;
 
 import androidx.room.Dao;
 import androidx.room.Delete;

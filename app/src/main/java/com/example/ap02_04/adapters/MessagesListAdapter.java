@@ -10,12 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ap02_04.R;
 import com.example.ap02_04.entities.Message;
+import com.example.ap02_04.webservices.WebChat;
 
 import java.util.List;
 
 public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapter.MessageViewHolder> {
 
-    private String currentUsername = "aaa@gmail.com";
     private Message current;
     private int currentPosition = 0;
 
@@ -43,7 +43,7 @@ public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapte
             current = messages.get(currentPosition);
             currentPosition += 1;
             View viewItem;
-            if (current.getSender().getUsername() == currentUsername) {
+            if (current.getSender().getUsername() == WebChat.getUsername()) {
                 viewItem = mInflater.inflate(R.layout.sent_message_layout, parent, false);
             } else {
                 viewItem = mInflater.inflate(R.layout.received_message_layout, parent, false);
@@ -58,7 +58,7 @@ public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapte
         if (messages != null) {
             current = messages.get(position);
             // checks if sent or received message
-            if (current.getSender().getUsername() == currentUsername){
+            if (current.getSender().getUsername() == WebChat.getUsername()){
                 holder.tvSentContent.setText(current.getContent());
             }
             else {

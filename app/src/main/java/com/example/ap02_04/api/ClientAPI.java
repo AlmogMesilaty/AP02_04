@@ -1,5 +1,8 @@
 package com.example.ap02_04.api;
 
+import com.example.ap02_04.R;
+import com.example.ap02_04.webservices.WebChat;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -17,7 +20,7 @@ public class ClientAPI {
         // convert JSON to object and vice versa
         Retrofit retrofit = new Retrofit.Builder()
                 //.baseUrl(WebChat.context.getString(R.string.BaseUrl))
-                .baseUrl("http://10.0.2.2:5000/api/")
+                .baseUrl(WebChat.getContext().getString(R.string.BaseUrl))
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();

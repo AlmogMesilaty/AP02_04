@@ -1,4 +1,4 @@
-package com.example.ap02_04.repositories;
+package com.example.ap02_04.room;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -14,7 +14,7 @@ import java.util.List;
 public interface MessageDao {
 
     @Query("SELECT * FROM message")
-    List<Message> getAll();
+    List<Message> getMessages();
 
     @Insert
     void insert(Message... messages);

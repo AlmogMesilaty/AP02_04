@@ -1,5 +1,6 @@
 package com.example.ap02_04.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
@@ -34,7 +35,7 @@ public class Chat {
         return users;
     }
 
-    public User getContact(String username) {
+    public User getContact(@NonNull String username) {
         if (username.equals(users.get(0).getUsername())) {
             return users.get(1);
         } else {
@@ -43,7 +44,11 @@ public class Chat {
     }
 
     public Message getLastMessage() {
-        return messages.get(0);
+        if (messages != null && !messages.isEmpty()){
+            return messages.get(0);
+        } else {
+            return new Message(-1, "00:00", new User("WebChat", "1234", "Welcome!", ""), "Hey!");
+        }
     }
 
     public List<Message> getMessages() {

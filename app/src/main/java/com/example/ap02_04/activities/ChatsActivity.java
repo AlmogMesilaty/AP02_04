@@ -3,22 +3,26 @@ package com.example.ap02_04.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ap02_04.R;
 import com.example.ap02_04.adapters.ChatsListAdapter;
-import com.example.ap02_04.api.ChatAPI;
 import com.example.ap02_04.viewmodels.ChatsViewModel;
+import com.example.ap02_04.webservices.WebChat;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ChatsActivity extends AppCompatActivity {
 
     private ChatsListAdapter adapter;
     private ChatsViewModel chatsViewModel;
+    private RecyclerView lstChats;
+    private ImageButton btnSettings;
+    private FloatingActionButton btnAdd;
+    private SearchView svSearch;
 
 
     @Override
@@ -26,34 +30,44 @@ public class ChatsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chats);
 
-        RecyclerView lstChats = findViewById(R.id.lstChats);
-        // creates new adapter
+        WebChat.setContext(this);
+
+        lstChats = findViewById(R.id.lstChats);
         adapter = new ChatsListAdapter(this);
-        // link recycler view with its adapter
         lstChats.setAdapter(adapter);
-        // making sure the element will appear in a linear form
         lstChats.setLayoutManager(new LinearLayoutManager(this));
 
-        ImageButton btnSettings = findViewById(R.id.btnSettings);
+        btnSettings = findViewById(R.id.btnSettings);
+        btnAdd = findViewById(R.id.btnAdd);
+        svSearch = findViewById(R.id.svSearch);
+        chatsViewModel = new ChatsViewModel();
+
         btnSettings.setOnClickListener(v -> {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         });
 
-        FloatingActionButton btnAdd = findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(v -> {
             Intent intent = new Intent(this, AddChatActivity.class);
             startActivity(intent);
         });
 
-        ChatAPI chatAPI = new ChatAPI();
-        //chatAPI.get();
-
-        chatsViewModel = new ViewModelProvider(this).get(ChatsViewModel.class);
-
-        // observe and set adapter when live data is changed
         chatsViewModel.getChats().observe(this, chats -> {
             adapter.setChats(chats);
+        });
+
+
+        svSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                // asks chats from the view model to give from the local ones
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
         });
 
     }

@@ -1,36 +1,36 @@
 package com.example.ap02_04.viewmodels;
 
-import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.ap02_04.entities.Chat;
+import com.example.ap02_04.entities.NewChat;
 import com.example.ap02_04.repositories.ChatsRepository;
 
 import java.util.List;
 
 public class ChatsViewModel extends ViewModel {
-    // all interaction with server
+
     private ChatsRepository mRepository;
-    // we are not changing the data, it's the repository purpose
-    private LiveData<List<Chat>> chats;
-    // current chat
-    private LiveData<Chat> chat;
+    private MutableLiveData<List<Chat>> chats;
+//    private LiveData<Chat> chat;
 
     public ChatsViewModel () {
         mRepository  = new ChatsRepository();
-        // asks from the repository all the chats
         chats = mRepository.getChats();
+//        if (chats.getValue() != null) {
+//            chat = mRepository.getChat(chats.getValue().get(0).getId());
+//        }
     }
 
-    // export the live data to the activities
-    public LiveData<List<Chat>> getChats() { return chats; }
+    public MutableLiveData<List<Chat>> getChats() { return chats; }
 
-    //public Chat getChat(int id) { return mRepository.getChat(id); }
+//    public LiveData<Chat> getChat(int id) { return chat; }
 
-    public void add(Chat chat) { mRepository.addChat(chat); }
+    public void add(NewChat newChat) { mRepository.addChat(newChat); }
 
     public void delete(int id) { mRepository.deleteChat(id); }
 
-    public void reload() { mRepository.reloadChats(); }
+//    public void reload() { mRepository.reloadChats(); }
 
 }
