@@ -5,6 +5,7 @@ import androidx.room.Room;
 
 import com.example.ap02_04.R;
 import com.example.ap02_04.entities.Chat;
+import com.example.ap02_04.entities.ChatLite;
 import com.example.ap02_04.entities.NewChat;
 import com.example.ap02_04.room.ChatDao;
 import com.example.ap02_04.room.LocalDatabase;
@@ -43,11 +44,11 @@ public class ChatAPI {
     }
 
     // get all chats
-    public void getChats(MutableLiveData<List<Chat>> chats) {
-        Call<List<Chat>> call = webServiceAPI.getChats(WebChat.getToken());
-        call.enqueue(new Callback<List<Chat>>() {
+    public void getChats(MutableLiveData<List<ChatLite>> chats) {
+        Call<List<ChatLite>> call = webServiceAPI.getChats(WebChat.getToken());
+        call.enqueue(new Callback<List<ChatLite>>() {
             @Override
-            public void onResponse(Call<List<Chat>> call, Response<List<Chat>> response) {
+            public void onResponse(Call<List<ChatLite>> call, Response<List<ChatLite>> response) {
                 new Thread(() -> {
 //                    chatDao.clear();
 //                    for ( Chat chat : response.body()) {
@@ -59,12 +60,12 @@ public class ChatAPI {
             }
 
             @Override
-            public void onFailure(Call<List<Chat>> call, Throwable t) { }
+            public void onFailure(Call<List<ChatLite>> call, Throwable t) { }
         });
     }
 
     // add chat
-    public void addChat(final NewChat newChat, MutableLiveData<List<Chat>> chats) {
+    public void addChat(final NewChat newChat, MutableLiveData<List<ChatLite>> chats) {
         Call<Chat> call = webServiceAPI.addChat(WebChat.getToken(), newChat);
         call.enqueue(new Callback<Chat>() {
             @Override
@@ -82,12 +83,15 @@ public class ChatAPI {
     }
 
     // delete chat
-    public void deleteChat(int id) {
+    public void deleteChat(int id, MutableLiveData<List<ChatLite>> chats) {
         Call<Void> call = webServiceAPI.deleteChat(WebChat.getToken(), id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                //chatDao.delete(response.body());
+                new Thread(() -> {
+                    //chatDao.delete(response.body());
+                    getChats(chats);
+                }).start();
             }
 
             @Override

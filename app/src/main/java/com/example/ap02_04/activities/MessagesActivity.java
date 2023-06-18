@@ -52,6 +52,8 @@ public class MessagesActivity extends AppCompatActivity {
         lstMessages.setAdapter(adapter);
         lstMessages.setLayoutManager(new LinearLayoutManager(this));
 
+        loadUserDetails();
+
         btnBack.setOnClickListener(v -> {
             Intent intent = new Intent(this, ChatsActivity.class);
             startActivity(intent);
@@ -60,6 +62,7 @@ public class MessagesActivity extends AppCompatActivity {
         // observe and set adapter when live data is changed
         messagesViewModel.getMessages().observe(this, messages -> {
             adapter.setMessages(messages);
+            adapter.notifyDataSetChanged();
         });
 
         btnSend.setOnClickListener(v -> {

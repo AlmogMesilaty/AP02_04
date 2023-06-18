@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.example.ap02_04.entities.Chat;
+import com.example.ap02_04.entities.ChatLite;
 import com.example.ap02_04.entities.User;
 
 public class WebChat extends Application {
@@ -12,6 +13,7 @@ public class WebChat extends Application {
     public static User user;
     public static User contact;
     public static String username;
+    public static ChatLite chatLite;
     public static Chat chat;
 
 
@@ -48,6 +50,12 @@ public class WebChat extends Application {
     public static void setContact(User contact) { WebChat.contact = contact; }
 
     public static Chat getChat() { return chat; }
+
+    public static void setChat(ChatLite chatLite) { WebChat.chatLite = chatLite; }
+
+    public static ChatLite getChatLite() { return chatLite; }
+
+    public static void setChatLite(ChatLite chatLite) { WebChat.chatLite = chatLite; }
 
     public static void setChat(Chat chat) { WebChat.chat = chat; }
 }

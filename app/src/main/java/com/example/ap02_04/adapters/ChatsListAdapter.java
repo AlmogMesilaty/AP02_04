@@ -1,7 +1,6 @@
 package com.example.ap02_04.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -15,11 +14,10 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ap02_04.R;
-import com.example.ap02_04.activities.MessagesActivity;
-import com.example.ap02_04.entities.Chat;
+import com.example.ap02_04.entities.ChatLite;
 import com.example.ap02_04.entities.Message;
 import com.example.ap02_04.entities.User;
-import com.example.ap02_04.webservices.WebChat;
+import com.example.ap02_04.viewmodels.ChatsViewModel;
 
 import java.util.List;
 
@@ -27,7 +25,11 @@ import java.util.List;
 public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.ChatViewHolder> {
 
     private final LayoutInflater mInflater;
-    private List<Chat> chats;
+    private List<ChatLite> chats;
+
+    private final ChatsListInterface chatsListInterface;
+
+    private ChatsViewModel chatsViewModel;
 
     class ChatViewHolder extends RecyclerView.ViewHolder {
         private final TextView tvDisplayName;
@@ -35,30 +37,42 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.Chat
         private final TextView tvCreated;
         private final ImageView ivProfilePic;
         private final CardView cvChat;
-        private  ChatViewHolder(View itemView) {
+        private  ChatViewHolder(View itemView, ChatsListInterface chatsListInterface) {
             super(itemView);
             tvDisplayName = itemView.findViewById(R.id.tvDisplayName);
             tvLastMessage = itemView.findViewById(R.id.tvLastMessage);
             tvCreated = itemView.findViewById(R.id.tvCreated);
             ivProfilePic = itemView.findViewById(R.id.ivProfilePic);
             cvChat = itemView.findViewById(R.id.cvChat);
+            itemView.setOnClickListener(v -> {
+                if (chatsListInterface != null) {
+                    int position = getAbsoluteAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        chatsListInterface.onItemClick(position);
+                    }
+                }
+            });
         }
     }
 
-    public ChatsListAdapter(Context context) { mInflater = LayoutInflater.from(context); }
+    public ChatsListAdapter(Context context, ChatsListInterface chatsListInterface) {
+        mInflater = LayoutInflater.from(context);
+        this.chatsListInterface = chatsListInterface;
+    }
 
     @Override
     public ChatViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View viewItem = mInflater.inflate(R.layout.chat_layout, parent, false);
-        return new ChatViewHolder(viewItem);
+        return new ChatViewHolder(viewItem, chatsListInterface);
     }
+
 
     @Override
     public void onBindViewHolder(ChatViewHolder holder, int position) {
 
         if (chats != null) {
-            final Chat current = chats.get(position);
-            final User contact = current.getContact(WebChat.getUsername());
+            final ChatLite current = chats.get(position);
+            final User contact = current.getUser();
 
             holder.tvDisplayName.setText(contact.getDisplayName());
             holder.ivProfilePic.setImageBitmap(getUserImage(contact.getProfilePic()));
@@ -67,15 +81,6 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.Chat
 
             holder.tvLastMessage.setText(lastMessage.getContent());
             holder.tvCreated.setText(lastMessage.getCreated());
-
-            // set click listener for the item view
-            holder.cvChat.setOnClickListener(view -> {
-                WebChat.setContact(contact);
-                WebChat.setChat(chats.get(position));
-                Context context = view.getContext();
-                Intent i = new Intent(context, MessagesActivity.class);
-                context.startActivity(i);
-            });
         }
     }
 
@@ -84,7 +89,7 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.Chat
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 
-    public void setChats(List<Chat> s) {
+    public void setChats(List<ChatLite> s) {
         chats = s;
         //notifyDataSetChanged();
     }
@@ -98,7 +103,7 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.Chat
         }
     }
 
-    public Chat getItem(int position) {
+    public ChatLite getItem(int position) {
         if (chats != null) {
             return chats.get(position);
         } else {

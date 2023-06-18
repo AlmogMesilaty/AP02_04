@@ -1,6 +1,7 @@
 package com.example.ap02_04.api;
 
 import com.example.ap02_04.entities.Chat;
+import com.example.ap02_04.entities.ChatLite;
 import com.example.ap02_04.entities.Message;
 import com.example.ap02_04.entities.NewChat;
 import com.example.ap02_04.entities.NewMessage;
@@ -23,7 +24,7 @@ public interface WebServiceAPI {
 
 
     @GET("Chats")
-    Call<List<Chat>> getChats(@Header("Authorization") String token);
+    Call<List<ChatLite>> getChats(@Header("Authorization") String token);
 
     @POST("Chats")
     Call<Chat> addChat(@Header("Authorization") String token, @Body NewChat newChat);
