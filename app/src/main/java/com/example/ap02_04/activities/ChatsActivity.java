@@ -2,8 +2,10 @@ package com.example.ap02_04.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,21 +29,20 @@ import retrofit2.Response;
 
 public class ChatsActivity extends AppCompatActivity implements ChatsListInterface {
 
+    // declarations for all the variables in the chats activity
     private ChatsListAdapter adapter;
     private ChatsViewModel chatsViewModel;
     private RecyclerView lstChats;
     private ImageButton btnSettings;
     private FloatingActionButton btnAdd;
-    private SearchView svSearch;
-
+    private EditText etSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chats);
 
-        WebChat.setContext(this);
-
+        // connect each variable with its corresponding component in the xml file
         lstChats = findViewById(R.id.lstChats);
         adapter = new ChatsListAdapter(this, this);
         lstChats.setAdapter(adapter);
@@ -49,56 +50,58 @@ public class ChatsActivity extends AppCompatActivity implements ChatsListInterfa
 
         btnSettings = findViewById(R.id.btnSettings);
         btnAdd = findViewById(R.id.btnAdd);
-        svSearch = findViewById(R.id.svSearch);
-        chatsViewModel = new ChatsViewModel();
+        etSearch = findViewById(R.id.etSearch);
+        chatsViewModel = new ChatsViewModel(this);
 
+        // defines settings button behavior
         btnSettings.setOnClickListener(v -> {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         });
 
+        // defines add button behavior
         btnAdd.setOnClickListener(v -> {
             Intent intent = new Intent(this, AddChatActivity.class);
             startActivity(intent);
         });
 
+        // asks form the view model to get all the chats of the current logged user
         chatsViewModel.getChats().observe(this, chats -> {
             adapter.setChats(chats);
             adapter.notifyDataSetChanged();
         });
 
-
-        svSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        // listen to the search field, defines its behavior on text change
+        etSearch.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onQueryTextSubmit(String s) {
-                // asks chats from the view model to give from the local ones
-                return false;
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                chatsViewModel.search(etSearch.getText().toString());
             }
 
             @Override
-            public boolean onQueryTextChange(String s) {
-                return false;
+            public void afterTextChanged(Editable editable) {
+                if (etSearch.getText().toString().trim().isEmpty()) {
+                    chatsViewModel.search("");
+                }
             }
         });
 
+        // defines the chats list item behavior when swiped left
         new ItemTouchHelper(simpleCallback).attachToRecyclerView(lstChats);
 
     }
 
-    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
-        @Override
-        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-            return false;
-        }
+    // method for printing messages to the screen
+    private void showToast(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
 
-        @Override
-        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            int position = viewHolder.getAbsoluteAdapterPosition();
-            chatsViewModel.delete(adapter.getItem(position).getId());
-        }
-    };
 
+    // method for getting full details of specific chat
     public void getChat() {
         Call<Chat> call = ClientAPI.getService().getChat(WebChat.getToken(), WebChat.getChatLite().getId());
         call.enqueue(new Callback<Chat>() {
@@ -119,15 +122,30 @@ public class ChatsActivity extends AppCompatActivity implements ChatsListInterfa
         });
     }
 
-    private void showToast(String message) {
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-    }
 
-
+    // recognize which chat has been clicked, and call get chat to get its details
     @Override
     public void onItemClick(int position) {
         WebChat.setContact(adapter.getItem(position).getUser());
         WebChat.setChatLite(adapter.getItem(position));
         getChat();
+//        Intent intent = new Intent(this, MessagesActivity.class);
+//        startActivity(intent);
     }
+
+
+    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            int position = viewHolder.getAbsoluteAdapterPosition();
+            chatsViewModel.delete(adapter.getItem(position).getId());
+        }
+    };
+
 }
+

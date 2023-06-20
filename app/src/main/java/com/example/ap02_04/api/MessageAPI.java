@@ -17,6 +17,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MessageAPI {
 
+    // ADD THE ROOM FUNCTIONALITY
+
     Retrofit retrofit;
     WebServiceAPI webServiceAPI;
 
@@ -42,8 +44,9 @@ public class MessageAPI {
         call.enqueue(new Callback<List<Message>>() {
             @Override
             public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
+
                 new Thread(() -> {
-                    messages.setValue(response.body());
+                    messages.postValue(response.body());
                 }).start();
             }
 

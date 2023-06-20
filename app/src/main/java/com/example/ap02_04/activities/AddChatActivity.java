@@ -29,7 +29,7 @@ public class AddChatActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         btnAdd = findViewById(R.id.btnAdd);
         inputUsername = findViewById(R.id.inputUsername);
-        chatsViewModel = new ChatsViewModel();
+        chatsViewModel = new ChatsViewModel(this);
 
         btnAdd.setOnClickListener(v -> {
             if (isValidUsername()) {

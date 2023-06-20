@@ -18,7 +18,6 @@ public class ChatLite {
     @TypeConverters(Converters.class)
     private Message lastMessage;
 
-
     public ChatLite(int id, User user, Message lastMessage) {
         this.id = id;
         this.user = user;

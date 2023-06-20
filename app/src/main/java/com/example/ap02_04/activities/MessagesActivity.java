@@ -22,14 +22,17 @@ import com.example.ap02_04.webservices.WebChat;
 
 public class MessagesActivity extends AppCompatActivity {
 
+    // declarations for all variables of messages activity
     private ImageButton btnBack;
     private ImageView ivProfilePic;
     private TextView tvDisplayName;
     private ImageButton btnSend;
     private EditText etTextBox;
 
+    // creates message view model
     private MessagesViewModel messagesViewModel;
 
+    // creates the messages recycler list
     RecyclerView lstMessages;
 
     @Override
@@ -37,23 +40,26 @@ public class MessagesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
 
-        WebChat.setContext(getApplicationContext());
-
+        // connect all the variables with their xml object compatibles
         btnBack = findViewById(R.id.btnBack);
         ivProfilePic = findViewById(R.id.ivProfilePic);
         tvDisplayName = findViewById(R.id.tvDisplayName);
         btnSend = findViewById(R.id.btnSend);
         etTextBox = findViewById(R.id.etTextBox);
+        lstMessages = findViewById(R.id.lstMessages);
 
+        // creates messages model
         messagesViewModel = new MessagesViewModel();
 
-        lstMessages = findViewById(R.id.lstMessages);
+        // creates adapter for the messages list
         final MessagesListAdapter adapter = new MessagesListAdapter(this);
         lstMessages.setAdapter(adapter);
         lstMessages.setLayoutManager(new LinearLayoutManager(this));
 
+        // loads the user details
         loadUserDetails();
 
+        // defines the behavior when back button is clicked
         btnBack.setOnClickListener(v -> {
             Intent intent = new Intent(this, ChatsActivity.class);
             startActivity(intent);
@@ -65,6 +71,7 @@ public class MessagesActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         });
 
+        // defined the behavior when send button is clicked
         btnSend.setOnClickListener(v -> {
             if (!etTextBox.getText().toString().trim().isEmpty()) {
                 messagesViewModel.add(new NewMessage(etTextBox.getText().toString()));
@@ -73,6 +80,7 @@ public class MessagesActivity extends AppCompatActivity {
 
     }
 
+    // presents the user detail in the activity
     private void loadUserDetails() {
         tvDisplayName.setText(WebChat.getContact().getDisplayName());
         byte[] bytes = Base64.decode(WebChat.getContact().getProfilePic(), Base64.DEFAULT);

@@ -50,11 +50,11 @@ public class ChatAPI {
             @Override
             public void onResponse(Call<List<ChatLite>> call, Response<List<ChatLite>> response) {
                 new Thread(() -> {
-//                    chatDao.clear();
-//                    for ( Chat chat : response.body()) {
-//                        chatDao.insert(chat);
-//                    }
-//                    chats.postValue(chatDao.getChats(WebChat.getUsername()));
+                    chatDao.clear();
+                    for (ChatLite chat : response.body()) {
+                        chatDao.insert(chat);
+                    }
+                    chats.postValue(chatDao.getChats(WebChat.getUsername()));
                     chats.postValue(response.body());
                 }).start();
             }

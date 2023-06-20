@@ -23,28 +23,55 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tvLogo"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                app:cardCornerRadius="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvUsername"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivProfilePic"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:adjustViewBounds="false"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/image5" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tvUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginStart="108dp"
+                android:layout_marginEnd="205dp"
                 android:text="@string/app_name"
                 android:textColor="@color/black"
-                android:textSize="25dp"
+                android:textSize="@dimen/_20sdp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnSettings"
+                app:layout_constraintStart_toEndOf="@+id/cardView"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
             <ImageButton
                 android:id="@+id/btnSettings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:layout_marginStart="72dp"
                 android:background="@color/white"
-                android:src="@drawable/ic_settings"
+                android:src="@drawable/baseline_settings_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvUsername"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -56,11 +83,13 @@
             android:layout_marginHorizontal="10dp"
             app:cardCornerRadius="10dp">
 
-            <SearchView
-                android:id="@+id/svSearch"
+            <EditText
+                android:id="@+id/etSearch"
+                android:drawableLeft="@drawable/baseline_search_24"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#EFF1F4"
+                android:textSize="@dimen/_16ssp"
                 android:hint="@string/hintSearch" />
 
         </androidx.cardview.widget.CardView>
@@ -91,7 +120,7 @@
         android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_margin="16dp"/>
+        android:layout_margin="@dimen/_16sdp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

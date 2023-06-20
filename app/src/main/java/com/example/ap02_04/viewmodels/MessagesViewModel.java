@@ -10,9 +10,13 @@ import java.util.List;
 
 public class MessagesViewModel {
 
+    // instance of messages repository
     private MessagesRepository mRepository;
+
+    // messages list as live data to enable messages activity to observe changes in it
     private LiveData<List<Message>> messages;
 
+    // constructor create instance of messages repo and asks for the messages list
     public MessagesViewModel () {
         mRepository  = new MessagesRepository();
         messages = mRepository.getMessages();
