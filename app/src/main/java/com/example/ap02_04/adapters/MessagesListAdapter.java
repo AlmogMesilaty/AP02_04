@@ -16,10 +16,13 @@ import java.util.List;
 
 public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapter.MessageViewHolder> {
 
+    private final LayoutInflater mInflater;
+    private List<Message> messages;
+
     private Message current;
     private int currentPosition = 0;
 
-    // holder for sent message
+
     class MessageViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView tvSentContent;
@@ -27,23 +30,26 @@ public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapte
 
         private MessageViewHolder(View itemView) {
             super(itemView);
+//            currentPosition = 0;
             tvSentContent = itemView.findViewById(R.id.tvSentContent);
             tvReceivedContent = itemView.findViewById(R.id.tvReceivedContent);
         }
+
     }
 
-    private final LayoutInflater mInflater;
-    private List<Message> messages;
 
-    public MessagesListAdapter(Context context) { mInflater = LayoutInflater.from(context); }
+    public MessagesListAdapter(Context context) {
+        mInflater = LayoutInflater.from(context);
+    }
 
     @Override
-    public MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MessageViewHolder onCreateViewHolder(ViewGroup parent, int position) {
+
         if (messages != null) {
             current = messages.get(currentPosition);
-            currentPosition += 1;
+            currentPosition = currentPosition + 1;
             View viewItem;
-            if (current.getSender().getUsername() == WebChat.getUsername()) {
+            if (current.getSender().getUsername().equals(WebChat.getUsername())) {
                 viewItem = mInflater.inflate(R.layout.sent_message_layout, parent, false);
             } else {
                 viewItem = mInflater.inflate(R.layout.received_message_layout, parent, false);
@@ -55,16 +61,25 @@ public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapte
 
     @Override
     public void onBindViewHolder(MessagesListAdapter.MessageViewHolder holder, int position) {
+
         if (messages != null) {
             current = messages.get(position);
+
             // checks if sent or received message
-            if (current.getSender().getUsername() == WebChat.getUsername()){
-                holder.tvSentContent.setText(current.getContent());
+            if (current.getSender().getUsername().equals(WebChat.getUsername())){
+                if (holder.tvSentContent != null) {
+                    holder.tvSentContent.setText(current.getContent());
+                }
             }
+
             else {
-                holder.tvReceivedContent.setText(current.getContent());
+                if (holder.tvReceivedContent != null) {
+                    holder.tvReceivedContent.setText(current.getContent());
+                }
             }
+
         }
+
     }
 
     public void setMessages(List<Message> s) {

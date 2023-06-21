@@ -59,7 +59,7 @@ public class MessagesRepository {
         return messageListData;
     }
 
-    public void addMessage(final NewMessage newMessage) { messageAPI.addMessage(newMessage); }
+    public void addMessage(final NewMessage newMessage) { messageAPI.addMessage(newMessage, messageListData); }
 
     public void reloadMessages() {
 

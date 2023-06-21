@@ -36,10 +36,10 @@ public interface WebServiceAPI {
     Call<Void> deleteChat(@Header("Authorization") String token, @Path("id") int id);
 
     @POST("Chats/{id}/Messages")
-    Call<Message> addMessage(@Header("Authorization") String token, @Body NewMessage newMessage);
+    Call<Message> addMessage(@Header("Authorization") String token, @Body NewMessage newMessage, @Path("id") int id);
 
     @GET("Chats/{id}/Messages")
-    Call<List<Message>> getMessages(@Header("Authorization") String token);
+    Call<List<Message>> getMessages(@Header("Authorization") String token, @Path("id") int id);
 
     @POST("Users")
     Call<Void> addUser(@Header("Authorization") String token, @Body UserNoId user);

@@ -1,11 +1,16 @@
 package com.example.ap02_04.activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,6 +42,9 @@ public class ChatsActivity extends AppCompatActivity implements ChatsListInterfa
     private FloatingActionButton btnAdd;
     private EditText etSearch;
 
+    private ImageView ivProfilePic;
+    private TextView tvDisplayName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +60,14 @@ public class ChatsActivity extends AppCompatActivity implements ChatsListInterfa
         btnAdd = findViewById(R.id.btnAdd);
         etSearch = findViewById(R.id.etSearch);
         chatsViewModel = new ChatsViewModel(this);
+
+        ivProfilePic = findViewById(R.id.ivProfilePic);
+        tvDisplayName = findViewById(R.id.tvDisplayName);
+
+        WebChat.setContext(this);
+
+        // loads the user details
+        loadUserDetails();
 
         // defines settings button behavior
         btnSettings.setOnClickListener(v -> {
@@ -129,8 +145,6 @@ public class ChatsActivity extends AppCompatActivity implements ChatsListInterfa
         WebChat.setContact(adapter.getItem(position).getUser());
         WebChat.setChatLite(adapter.getItem(position));
         getChat();
-//        Intent intent = new Intent(this, MessagesActivity.class);
-//        startActivity(intent);
     }
 
 
@@ -146,6 +160,14 @@ public class ChatsActivity extends AppCompatActivity implements ChatsListInterfa
             chatsViewModel.delete(adapter.getItem(position).getId());
         }
     };
+
+    // presents the user detail in the activity
+    private void loadUserDetails() {
+        tvDisplayName.setText(WebChat.getUser().getDisplayName());
+        byte[] bytes = Base64.decode(WebChat.getUser().getProfilePic(), Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        ivProfilePic.setImageBitmap(bitmap);
+    }
 
 }
 

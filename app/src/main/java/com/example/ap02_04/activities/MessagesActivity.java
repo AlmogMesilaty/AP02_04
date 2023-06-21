@@ -51,6 +51,8 @@ public class MessagesActivity extends AppCompatActivity {
         // creates messages model
         messagesViewModel = new MessagesViewModel();
 
+        WebChat.setContext(this);
+
         // creates adapter for the messages list
         final MessagesListAdapter adapter = new MessagesListAdapter(this);
         lstMessages.setAdapter(adapter);
@@ -79,6 +81,14 @@ public class MessagesActivity extends AppCompatActivity {
         });
 
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        WebChat.setContext(this);
+    }
+
 
     // presents the user detail in the activity
     private void loadUserDetails() {

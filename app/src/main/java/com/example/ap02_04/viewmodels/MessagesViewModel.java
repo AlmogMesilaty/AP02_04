@@ -22,10 +22,10 @@ public class MessagesViewModel {
         messages = mRepository.getMessages();
     }
 
-    // export the live data to the activities
+    // returns the live data object
     public LiveData<List<Message>> getMessages() { return messages; }
 
+    // adds new message
     public void add(NewMessage newMessage) { mRepository.addMessage(newMessage); }
 
-//    public void reload() { mRepository.reloadMessages(); }
 }

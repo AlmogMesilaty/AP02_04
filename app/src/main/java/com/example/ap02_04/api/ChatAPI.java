@@ -55,7 +55,6 @@ public class ChatAPI {
                         chatDao.insert(chat);
                     }
                     chats.postValue(chatDao.getChats(WebChat.getUsername()));
-                    chats.postValue(response.body());
                 }).start();
             }
 
@@ -71,8 +70,6 @@ public class ChatAPI {
             @Override
             public void onResponse(Call<Chat> call, Response<Chat> response) {
                 new Thread(() -> {
-//                    chatDao.insert(response.body());
-//                    chats.postValue(chatDao.getChats(WebChat.getUsername()));
                     getChats(chats);
                 }).start();
             }
@@ -89,7 +86,6 @@ public class ChatAPI {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 new Thread(() -> {
-                    //chatDao.delete(response.body());
                     getChats(chats);
                 }).start();
             }

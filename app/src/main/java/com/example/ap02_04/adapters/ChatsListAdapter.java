@@ -17,7 +17,6 @@ import com.example.ap02_04.R;
 import com.example.ap02_04.entities.ChatLite;
 import com.example.ap02_04.entities.Message;
 import com.example.ap02_04.entities.User;
-import com.example.ap02_04.viewmodels.ChatsViewModel;
 
 import java.util.List;
 
@@ -29,14 +28,13 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.Chat
 
     private final ChatsListInterface chatsListInterface;
 
-    private ChatsViewModel chatsViewModel;
-
     class ChatViewHolder extends RecyclerView.ViewHolder {
         private final TextView tvDisplayName;
         private final TextView tvLastMessage;
         private final TextView tvCreated;
         private final ImageView ivProfilePic;
         private final CardView cvChat;
+
         private  ChatViewHolder(View itemView, ChatsListInterface chatsListInterface) {
             super(itemView);
             tvDisplayName = itemView.findViewById(R.id.tvDisplayName);
@@ -53,6 +51,7 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.Chat
                 }
             });
         }
+
     }
 
     public ChatsListAdapter(Context context, ChatsListInterface chatsListInterface) {
@@ -77,10 +76,15 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.Chat
             holder.tvDisplayName.setText(contact.getDisplayName());
             holder.ivProfilePic.setImageBitmap(getUserImage(contact.getProfilePic()));
 
-            final Message lastMessage = current.getLastMessage();
+            if (current.getLastMessage() != null) {
+                final Message lastMessage = current.getLastMessage();
+                holder.tvLastMessage.setText(lastMessage.getContent());
+                holder.tvCreated.setText(lastMessage.getCreated());
+            } else {
+                holder.tvLastMessage.setText("Welcome to WebChat!");
+                holder.tvCreated.setText("00:00:00 01/01/1996");
+            }
 
-            holder.tvLastMessage.setText(lastMessage.getContent());
-            holder.tvCreated.setText(lastMessage.getCreated());
         }
     }
 
@@ -91,7 +95,6 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.Chat
 
     public void setChats(List<ChatLite> s) {
         chats = s;
-        //notifyDataSetChanged();
     }
 
     @Override
