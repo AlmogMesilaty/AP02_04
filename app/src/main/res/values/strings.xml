@@ -21,6 +21,7 @@
     <string name="RegUsernameHint">email@example.com</string>
     <string name="login_to_continue">Login to continue</string>
     <string name="BaseUrl">http://10.0.2.2:5000/api/</string>
+    <string name="msg_token_fmt">FCM Token: %1$s</string>
 
 
 </resources>

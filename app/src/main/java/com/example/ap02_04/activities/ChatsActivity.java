@@ -1,5 +1,7 @@
 package com.example.ap02_04.activities;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,6 +9,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -26,7 +29,10 @@ import com.example.ap02_04.api.ClientAPI;
 import com.example.ap02_04.entities.Chat;
 import com.example.ap02_04.viewmodels.ChatsViewModel;
 import com.example.ap02_04.webservices.WebChat;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,6 +55,43 @@ public class ChatsActivity extends AppCompatActivity implements ChatsListInterfa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chats);
+
+        // firebase
+        FirebaseMessaging.getInstance().subscribeToTopic("Messages")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = "Done";
+                        if (!task.isSuccessful()) {
+                            msg = "Failed";
+                    }
+                }
+        });
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+
+                        // Log and toast
+                        String msg = getString(R.string.msg_token_fmt, token);
+                        Log.d(TAG, msg);
+                        Toast.makeText(ChatsActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+//        // get the token of app - Hemi
+//        FirebaseInstancedId.getInstance().getInstanceId().addOnSuccessListener(ChatsActivity.this, instanceIdResult -> {
+//                String newToken = instanceIdResult.getToken();
+//        });
+
 
         // connect each variable with its corresponding component in the xml file
         lstChats = findViewById(R.id.lstChats);
