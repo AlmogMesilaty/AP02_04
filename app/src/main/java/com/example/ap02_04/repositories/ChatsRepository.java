@@ -78,18 +78,18 @@ public class ChatsRepository {
 
     }
 
-    public MutableLiveData<List<ChatLite>> search(String text) {
-        Thread thread = new Thread(() -> {
-            chatListData.postValue(chatDao.search(text));
-        });
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            return null;
-        }
-        return chatListData;
-    }
+//    public MutableLiveData<List<ChatLite>> search(String text) {
+//        Thread thread = new Thread(() -> {
+//            chatListData.postValue(chatDao.search(text));
+//        });
+//        thread.start();
+//        try {
+//            thread.join();
+//        } catch (InterruptedException e) {
+//            return null;
+//        }
+//        return chatListData;
+//    }
 
 }
 

@@ -81,9 +81,15 @@ public class ChatsActivity extends AppCompatActivity implements ChatsListInterfa
             startActivity(intent);
         });
 
-        // asks form the view model to get all the chats of the current logged user
+        // asks from the view model to get all the chats of the current logged user
         chatsViewModel.getChats().observe(this, chats -> {
             adapter.setChats(chats);
+            adapter.notifyDataSetChanged();
+        });
+
+        // asks from view model the filtered chats
+        chatsViewModel.getFilteredList().observe(this, filterChats -> {
+            adapter.setChats(filterChats);
             adapter.notifyDataSetChanged();
         });
 

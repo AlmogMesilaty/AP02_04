@@ -47,7 +47,7 @@ public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapte
 
         if (messages != null) {
             current = messages.get(currentPosition);
-            currentPosition = (currentPosition + 1) % 7;
+            currentPosition = (currentPosition + 1) % 3;
             View viewItem;
             if (current.getSender().getUsername().equals(WebChat.getUsername())) {
                 viewItem = mInflater.inflate(R.layout.sent_message_layout, parent, false);
