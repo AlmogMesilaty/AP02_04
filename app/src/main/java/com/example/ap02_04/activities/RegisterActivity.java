@@ -8,10 +8,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Patterns;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -22,6 +19,9 @@ import com.example.ap02_04.R;
 import com.example.ap02_04.api.ClientAPI;
 import com.example.ap02_04.entities.UserNoId;
 import com.example.ap02_04.webservices.WebChat;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textview.MaterialTextView;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -34,12 +34,12 @@ import retrofit2.Response;
 public class RegisterActivity extends AppCompatActivity {
 
     private ActivityResultLauncher<String> imagePickerLauncher;
-    TextView tvLogin;
+    MaterialTextView tvLogin;
     EditText inputUsername;
     EditText inputPassword;
     EditText inputDisplayName;
-    ImageView ivProfilePic;
-    Button btnRegister;
+    RoundedImageView ivProfilePic;
+    MaterialButton btnRegister;
 
     private String encodedImage;
 

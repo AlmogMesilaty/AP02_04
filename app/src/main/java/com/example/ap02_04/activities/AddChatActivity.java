@@ -3,7 +3,6 @@ package com.example.ap02_04.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -13,10 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.ap02_04.R;
 import com.example.ap02_04.entities.NewChat;
 import com.example.ap02_04.viewmodels.ChatsViewModel;
+import com.google.android.material.button.MaterialButton;
 
 public class AddChatActivity extends AppCompatActivity {
 
-    private Button btnAdd;
+    private MaterialButton btnAdd;
     private EditText inputUsername;
     private ImageButton btnBack;
     private ChatsViewModel chatsViewModel;
@@ -29,7 +29,7 @@ public class AddChatActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         btnAdd = findViewById(R.id.btnAdd);
         inputUsername = findViewById(R.id.inputUsername);
-        chatsViewModel = new ChatsViewModel(this);
+        chatsViewModel = new ChatsViewModel();
 
         btnAdd.setOnClickListener(v -> {
             if (isValidUsername()) {

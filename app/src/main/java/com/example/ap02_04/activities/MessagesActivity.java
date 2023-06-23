@@ -40,6 +40,8 @@ public class MessagesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
 
+        WebChat.setContext(this);
+
         // connect all the variables with their xml object compatibles
         btnBack = findViewById(R.id.btnBack);
         ivProfilePic = findViewById(R.id.ivProfilePic);
@@ -49,14 +51,16 @@ public class MessagesActivity extends AppCompatActivity {
         lstMessages = findViewById(R.id.lstMessages);
 
         // creates messages model
-        messagesViewModel = new MessagesViewModel();
-
-        WebChat.setContext(this);
+        messagesViewModel = new MessagesViewModel(this);
 
         // creates adapter for the messages list
         final MessagesListAdapter adapter = new MessagesListAdapter(this);
         lstMessages.setAdapter(adapter);
         lstMessages.setLayoutManager(new LinearLayoutManager(this));
+
+        // set the messages to be the current ones in the WebChat
+//        adapter.setMessages(WebChat.getChat().getMessages());
+//        adapter.notifyDataSetChanged();
 
         // loads the user details
         loadUserDetails();
@@ -77,6 +81,7 @@ public class MessagesActivity extends AppCompatActivity {
         btnSend.setOnClickListener(v -> {
             if (!etTextBox.getText().toString().trim().isEmpty()) {
                 messagesViewModel.add(new NewMessage(etTextBox.getText().toString()));
+                etTextBox.setText("");
             }
         });
 

@@ -16,12 +16,12 @@ import java.util.List;
 public class MessagesRepository {
 
     // variables for handling room communication
-    private MessageDao messageDao;
-    private MessagesRepository.MessageListData messageListData;
     private LocalDatabase db;
+    private MessageDao messageDao;
 
     // object message api handles the requests from the remote server
     private MessageAPI messageAPI;
+    private MessageListData messageListData;
 
     // constructor
     public MessagesRepository() {
@@ -39,10 +39,14 @@ public class MessagesRepository {
 
         // creates instance of messages api class
         messageAPI = new MessageAPI();
+
+//        reloadMessages();
+
     }
 
     // class that holds live data as an attribute
     class MessageListData extends MutableLiveData<List<Message>> {
+
         public MessageListData() {
             super();
             setValue(new LinkedList<Message>());
@@ -52,20 +56,54 @@ public class MessagesRepository {
             super.onActive();
             reloadMessages();
         }
+
     }
 
 
-    public MessagesRepository.MessageListData getMessages() {
+    public MessageListData getMessages() {
+//        reloadMessages();
         return messageListData;
     }
 
-    public void addMessage(final NewMessage newMessage) { messageAPI.addMessage(newMessage, messageListData); }
+    public MessageListData addMessage(final NewMessage newMessage) {
+
+        Thread thread1 = new Thread(() -> {
+            messageAPI.addMessage(newMessage, messageListData);
+        });
+        thread1.start();
+        try {
+            thread1.join();
+        } catch (InterruptedException e) {
+            return null;
+        }
+
+        Thread thread2 = new Thread(() -> {
+            messageAPI.getMessages(messageListData);
+        });
+        thread2.start();
+        try {
+            thread2.join();
+        } catch (InterruptedException e) {
+            return null;
+        }
+
+        return messageListData;
+    }
 
     public void reloadMessages() {
 
-        new Thread(() -> {
+        Thread thread = new Thread(() -> {
+
             // set messages list to be the data that is in the local server
             messageListData.postValue(messageDao.getMessages());
+
+        });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) { }
+
+        new Thread(() -> {
 
             // asks message api to fetch the fresh data from the remote server
             messageAPI.getMessages(messageListData);

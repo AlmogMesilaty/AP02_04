@@ -26,8 +26,6 @@ public class MessageAPI {
     private LocalDatabase db;
     private MessageDao messageDao;
 
-    private MutableLiveData<Message> newMessage;
-
     public MessageAPI() {
         // using builder to create retrofit object
         // convert JSON to object and vice versa
@@ -77,7 +75,9 @@ public class MessageAPI {
             @Override
             public void onResponse(Call<Message> call, Response<Message> response) {
                 // call get messages to update the messages after adding new one
-                getMessages(messages);
+//                new Thread(() -> {
+//                    getMessages(messages);
+//                }).start();
             }
 
             @Override

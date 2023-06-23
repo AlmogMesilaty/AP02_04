@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 public class Chat {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     private int id;
 
     @TypeConverters(Converters.class)

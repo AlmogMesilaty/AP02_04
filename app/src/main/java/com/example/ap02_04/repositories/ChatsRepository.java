@@ -36,7 +36,7 @@ public class ChatsRepository {
         chatListData = new ChatListData();
         chatAPI = new ChatAPI();
 
-        reloadChats();
+//        reloadChats();
 
     }
 
@@ -53,11 +53,10 @@ public class ChatsRepository {
             super.onActive();
             reloadChats();
         }
-
     }
 
     public MutableLiveData<List<ChatLite>> getChats() {
-        reloadChats();
+//        reloadChats();
         return chatListData;
     }
 

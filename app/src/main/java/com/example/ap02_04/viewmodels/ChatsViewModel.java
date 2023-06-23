@@ -1,6 +1,5 @@
 package com.example.ap02_04.viewmodels;
 
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -19,7 +18,7 @@ public class ChatsViewModel extends ViewModel {
     private MutableLiveData<List<ChatLite>> chats;
 
     // constructor for the view model class initializes new chats repository object
-    public ChatsViewModel (LifecycleOwner application) {
+    public ChatsViewModel () {
         mRepository  = new ChatsRepository();
 
         // getting the chats from the data handling section

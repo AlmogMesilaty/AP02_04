@@ -15,15 +15,17 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     public FirebaseMessagingService() {
     }
 
+    // create on message received listener to know when to create the notification
     @Override
     public void onMessageReceived(@NonNull RemoteMessage message) {
         super.onMessageReceived(message);
         getFirebaseMessage(message.getNotification().getTitle(), message.getNotification().getBody());
     }
 
+    // create the notification, and publish
     public void getFirebaseMessage(String title, String msg) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "firebaseChannel")
-                .setSmallIcon(R.drawable.baseline_notifications_24)
+                .setSmallIcon(R.drawable.ic_notification)
                 .setContentTitle(title)
                 .setContentText(msg)
                 .setAutoCancel(true);
@@ -31,7 +33,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        manager.notify(101, builder.build());
-
+        manager.notify(1, builder.build());
     }
 }

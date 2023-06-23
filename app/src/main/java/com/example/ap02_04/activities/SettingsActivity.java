@@ -6,28 +6,29 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Patterns;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.ap02_04.R;
 import com.example.ap02_04.webservices.WebChat;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textview.MaterialTextView;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 public class SettingsActivity extends AppCompatActivity {
 
     ImageButton btnBack;
-    TextView tvDisplayName;
-    ImageView ivProfilePic;
-    TextView tvLogout;
+    MaterialTextView tvDisplayName;
+    RoundedImageView ivProfilePic;
+    MaterialTextView tvLogout;
     Switch sTheme;
     EditText inputUrl;
-    Button btnApply;
+    MaterialButton btnApply;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,6 @@ public class SettingsActivity extends AppCompatActivity {
         tvDisplayName = findViewById(R.id.tvDisplayName);
         ivProfilePic = findViewById(R.id.ivProfilePic);
 
-
         loadUserDetails();
 
         btnBack.setOnClickListener(v -> {
@@ -55,16 +55,20 @@ public class SettingsActivity extends AppCompatActivity {
             startActivity(new Intent(this, LoginActivity.class));
         });
 
-        sTheme.setOnClickListener(v -> {
-
-        });
 
         btnApply.setOnClickListener(v -> {
             if (isValidSettingsDetails()) {
-
             }
         });
 
+        // handle theme change
+        sTheme.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (b) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        });
     }
 
     private void showToast(String message) {
@@ -83,6 +87,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+
     private void loadUserDetails() {
         tvDisplayName.setText(WebChat.getUser().getDisplayName());
         inputUrl.setText(WebChat.getContext().getString(R.string.BaseUrl));
@@ -90,4 +95,13 @@ public class SettingsActivity extends AppCompatActivity {
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         ivProfilePic.setImageBitmap(bitmap);
     }
+
+    // remove eye flickers
+    public void recreate() {
+        finish();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        startActivity(getIntent());
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
 }

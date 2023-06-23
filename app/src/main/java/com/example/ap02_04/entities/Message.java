@@ -9,7 +9,7 @@ import com.example.ap02_04.converters.Converters;
 @Entity
 public class Message {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     private int id;
 
     private String created;

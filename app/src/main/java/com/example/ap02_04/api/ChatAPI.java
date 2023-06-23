@@ -20,6 +20,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ChatAPI {
+
     Retrofit retrofit;
     WebServiceAPI webServiceAPI;
 
@@ -73,7 +74,6 @@ public class ChatAPI {
                     getChats(chats);
                 }).start();
             }
-
             @Override
             public void onFailure(Call<Chat> call, Throwable t) { }
         });

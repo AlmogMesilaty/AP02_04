@@ -8,7 +8,7 @@ import com.example.ap02_04.entities.ChatLite;
 import com.example.ap02_04.entities.Message;
 import com.example.ap02_04.entities.User;
 
-@Database(entities = {ChatLite.class, Chat.class, Message.class, User.class}, version = 7)
+@Database(entities = {ChatLite.class, Chat.class, Message.class, User.class}, version = 8)
 public abstract class LocalDatabase extends RoomDatabase {
     public abstract ChatDao chatDao();
     public abstract MessageDao messageDao();

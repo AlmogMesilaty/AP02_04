@@ -26,7 +26,6 @@ public class WebChat extends Application {
         WebChat.context = context;
     }
 
-
     public static void setUser(User user) {
         WebChat.user = user;
     }
