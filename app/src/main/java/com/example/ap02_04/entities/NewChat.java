@@ -1,6 +1,7 @@
 package com.example.ap02_04.entities;
 
 public class NewChat {
+
     private String username;
 
     public NewChat(String username) {

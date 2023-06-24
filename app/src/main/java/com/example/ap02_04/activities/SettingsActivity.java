@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.ap02_04.R;
+import com.example.ap02_04.entities.ServerUrl;
 import com.example.ap02_04.webservices.WebChat;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
@@ -43,7 +44,9 @@ public class SettingsActivity extends AppCompatActivity {
         tvDisplayName = findViewById(R.id.tvDisplayName);
         ivProfilePic = findViewById(R.id.ivProfilePic);
 
-        loadUserDetails();
+        if (WebChat.getUser() != null) {
+            loadUserDetails();
+        }
 
         btnBack.setOnClickListener(v -> {
             Intent intent = new Intent(this, ChatsActivity.class);
@@ -58,6 +61,11 @@ public class SettingsActivity extends AppCompatActivity {
 
         btnApply.setOnClickListener(v -> {
             if (isValidSettingsDetails()) {
+                WebChat.setBaseUrl(inputUrl.getText().toString());
+                WebChat.getDb().serverUrlDao().clear();
+                WebChat.getDb().serverUrlDao().insert(new ServerUrl(inputUrl.getText().toString()));
+                WebChat.setToken(null);
+                startActivity(new Intent(this, LoginActivity.class));
             }
         });
 

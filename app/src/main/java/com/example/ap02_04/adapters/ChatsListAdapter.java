@@ -27,6 +27,7 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.Chat
     private List<ChatLite> chats;
 
     private final ChatsListInterface chatsListInterface;
+    private ChatViewHolder holder;
 
     class ChatViewHolder extends RecyclerView.ViewHolder {
         private final TextView tvDisplayName;

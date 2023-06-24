@@ -2,6 +2,7 @@ package com.example.ap02_04.api;
 
 import com.example.ap02_04.entities.Chat;
 import com.example.ap02_04.entities.ChatLite;
+import com.example.ap02_04.entities.FcmToken;
 import com.example.ap02_04.entities.Message;
 import com.example.ap02_04.entities.NewChat;
 import com.example.ap02_04.entities.NewMessage;
@@ -49,5 +50,8 @@ public interface WebServiceAPI {
 
     @POST("Tokens")
     Call<ResponseBody> getToken(@Body UserPass userPass);
+
+    @POST("Tokens/FCM")
+    Call<FcmToken> postFcmToken(@Body FcmToken fcmToken);
 
 }

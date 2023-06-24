@@ -33,6 +33,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        manager.notify(1, builder.build());
+        manager.notify(101, builder.build());
     }
 }

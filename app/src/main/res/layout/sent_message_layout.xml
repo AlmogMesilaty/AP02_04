@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
         android:layout_marginHorizontal="10.3dp"
-        app:cardBackgroundColor="#00BCD4"
+        app:cardBackgroundColor="@color/sent_message_background"
         app:cardCornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:text="Hello"
-            android:textColor="#00BCD4"/>
+            android:textColor="@color/sent_message_background"/>
 
     </androidx.cardview.widget.CardView>
 
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        app:cardBackgroundColor="#00BCD4"
+        app:cardBackgroundColor="@color/sent_message_background"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

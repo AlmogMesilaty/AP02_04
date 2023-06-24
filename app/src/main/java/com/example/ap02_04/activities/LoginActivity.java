@@ -7,15 +7,21 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import com.example.ap02_04.R;
 import com.example.ap02_04.api.ClientAPI;
+import com.example.ap02_04.entities.FcmToken;
+import com.example.ap02_04.entities.ServerUrl;
 import com.example.ap02_04.entities.User;
 import com.example.ap02_04.entities.UserPass;
+import com.example.ap02_04.room.LocalDatabase;
+import com.example.ap02_04.room.ServerUrlDao;
 import com.example.ap02_04.webservices.WebChat;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -36,6 +42,10 @@ public class LoginActivity extends AppCompatActivity {
     EditText inputUsername;
     EditText inputPassword;
     MaterialTextView tvRegister;
+    ImageButton btnSettings;
+
+    private LocalDatabase db;
+    private ServerUrlDao serverUrlDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +58,23 @@ public class LoginActivity extends AppCompatActivity {
         inputUsername = findViewById(R.id.inputUsername);
         inputPassword = findViewById(R.id.inputPassword);
         tvRegister = findViewById(R.id.tvRegister);
+        btnSettings = findViewById(R.id.btnSettings);
 
+        db = Room.databaseBuilder(WebChat.getContext(), LocalDatabase.class, "UrlDB")
+                .allowMainThreadQueries()
+                .fallbackToDestructiveMigration()
+                .build();
+
+        WebChat.setDb(db);
+
+        serverUrlDao = db.serverUrlDao();
+
+        if (serverUrlDao.get() != null) {
+            WebChat.setBaseUrl(serverUrlDao.get().getServerUrl());
+        } else {
+            WebChat.setBaseUrl("http://10.0.2.2:5000/api/");
+            serverUrlDao.insert(new ServerUrl(WebChat.getBaseUrl()));
+        }
 
         tvRegister.setOnClickListener(view -> {
             Intent i = new Intent(this, RegisterActivity.class);
@@ -61,6 +87,11 @@ public class LoginActivity extends AppCompatActivity {
                 UserPass user = new UserPass(inputUsername.getText().toString(), inputPassword.getText().toString());
                 loginUser(user);
             }
+        });
+
+        btnSettings.setOnClickListener(V -> {
+            Intent i = new Intent(this, SettingsActivity.class);
+            startActivity(i);
         });
 
 
@@ -77,10 +108,12 @@ public class LoginActivity extends AppCompatActivity {
                         // Get new FCM registration token
                         String token = task.getResult();
 
+                        postFcmToken(new FcmToken(token));
+
                         // Log and toast
-                        String msg = getString(R.string.msg_token_fmt, token);
-                        Log.d(TAG, msg);
-                        Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
+//                        String msg = getString(R.string.msg_token_fmt, token);
+//                        Log.d(TAG, msg);
+//                        Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -161,6 +194,26 @@ public class LoginActivity extends AppCompatActivity {
                 showToast(t.getLocalizedMessage());
             }
         });
+    }
+
+    public void postFcmToken(FcmToken fcmToken) {
+        Call<FcmToken> call = ClientAPI.getService().postFcmToken(fcmToken);
+        call.enqueue(new Callback<FcmToken>() {
+            @Override
+            public void onResponse(Call<FcmToken> call, Response<FcmToken> response) {
+                if (response.isSuccessful() && response.body().getFcmToken() != null) {
+                    showToast(response.body().getFcmToken());
+                } else {
+                    showToast(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FcmToken> call, Throwable t) {
+                showToast(t.getLocalizedMessage());
+            }
+        });
+
     }
 
 }

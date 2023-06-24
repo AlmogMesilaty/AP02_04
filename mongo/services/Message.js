@@ -25,7 +25,7 @@ const createMessageId = async (chatId) => {
     var currentId = await MessageId.findOne({ chatId: chatId });
     if(currentId) {
         const newId = currentId.messageId + 1;
-        await MessageId.findOneAndReplace({chatId: chatId}, {messageId: newId});
+        await MessageId.findOneAndReplace({ chatId: chatId }, { chatId: chatId, messageId: newId });
         return currentId;
     }
     currentId = new MessageId({ chatId: chatId, messageId: 0 })

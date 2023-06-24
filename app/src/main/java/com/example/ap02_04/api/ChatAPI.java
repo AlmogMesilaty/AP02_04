@@ -3,7 +3,6 @@ package com.example.ap02_04.api;
 import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;
 
-import com.example.ap02_04.R;
 import com.example.ap02_04.entities.Chat;
 import com.example.ap02_04.entities.ChatLite;
 import com.example.ap02_04.entities.NewChat;
@@ -31,7 +30,7 @@ public class ChatAPI {
         // using builder to create retrofit object
         // convert JSON to object and vice versa
         retrofit = new Retrofit.Builder()
-                .baseUrl(WebChat.getContext().getString(R.string.BaseUrl))
+                .baseUrl(WebChat.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         // asking retrofit to create webService object that implements what we

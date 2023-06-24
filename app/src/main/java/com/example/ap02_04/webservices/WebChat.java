@@ -6,6 +6,7 @@ import android.content.Context;
 import com.example.ap02_04.entities.Chat;
 import com.example.ap02_04.entities.ChatLite;
 import com.example.ap02_04.entities.User;
+import com.example.ap02_04.room.LocalDatabase;
 
 public class WebChat extends Application {
     public static Context context;
@@ -15,6 +16,8 @@ public class WebChat extends Application {
     public static String username;
     public static ChatLite chatLite;
     public static Chat chat;
+    public static String BaseUrl;
+    public static LocalDatabase db;
 
 
     public void onCreate() {
@@ -57,4 +60,12 @@ public class WebChat extends Application {
     public static void setChatLite(ChatLite chatLite) { WebChat.chatLite = chatLite; }
 
     public static void setChat(Chat chat) { WebChat.chat = chat; }
+
+    public static String getBaseUrl() { return BaseUrl; }
+
+    public static void setBaseUrl(String baseUrl) { BaseUrl = baseUrl; }
+
+    public static LocalDatabase getDb() { return db; }
+
+    public static void setDb(LocalDatabase db) { WebChat.db = db; }
 }

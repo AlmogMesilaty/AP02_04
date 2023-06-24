@@ -1,6 +1,7 @@
 package com.example.ap02_04.entities;
 
 public class NewMessage {
+
     private String msg;
 
     public NewMessage(String msg) {

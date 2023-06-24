@@ -1,6 +1,7 @@
 
 import { UserPass } from '../models/UserPass.js';
-import { CreateToken } from '../services/Token.js';
+import { CreateToken, CreateFcmToken } from '../services/Token.js';
+
 
 //POST - /api/tokens
 // done
@@ -20,4 +21,16 @@ const createToken = async (req, res) => {
     }
 };
 
-export { createToken };
+//POST - /api/tokens/FCM
+const createFcmToken = async(req, res) => {
+  
+  const { fcmToken } = req.body;
+
+  const newFcmToken = await CreateFcmToken(fcmToken);
+
+  res.status(200).json(newFcmToken);
+
+};
+
+
+export { createToken, createFcmToken };

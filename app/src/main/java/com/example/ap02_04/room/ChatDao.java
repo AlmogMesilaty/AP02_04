@@ -18,10 +18,6 @@ public interface ChatDao {
     @Query("SELECT * FROM chatLite WHERE :username = :username")
     List<ChatLite> getChats(String username);
 
-//    @Query("SELECT * FROM ChatLite WHERE chatLite.user IN " +
-//            "(SELECT user FROM User WHERE user.displayName LIKE :displayName || '%')")
-//    List<ChatLite> search(String displayName);
-
     @Query("SELECT * FROM chat WHERE id = :id")
     Chat getChat(int id);
 
