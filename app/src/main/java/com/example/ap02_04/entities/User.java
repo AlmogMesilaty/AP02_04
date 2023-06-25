@@ -5,14 +5,21 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class User {
+
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private String username;
-    private String displayName;
-    private int profilePic;
 
-    public User(String username, String displayName, int profilePic) {
+    private String username;
+
+    private String password;
+
+    private String displayName;
+
+    private String profilePic;
+
+    public User(String username,String password,String displayName, String profilePic) {
         this.username = username;
+        this.password = password;
         this.displayName = displayName;
         this.profilePic = profilePic;
     }
@@ -29,13 +36,13 @@ public class User {
         return username;
     }
 
+    public String getPassword() { return password;}
+
     public String getDisplayName() {
         return displayName;
     }
 
-    public int getProfilePic() {
-        return profilePic;
-    }
+    public String getProfilePic() { return profilePic; }
 
     public void setUsername(String username) {
         this.username = username;
@@ -45,7 +52,7 @@ public class User {
         this.displayName = displayName;
     }
 
-    public void setProfilePic(int profilePic) {
+    public void setProfilePic(String profilePic) {
         this.profilePic = profilePic;
     }
 }

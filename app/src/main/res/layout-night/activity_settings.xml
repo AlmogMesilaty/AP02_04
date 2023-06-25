@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ChatsActivity"
+    android:orientation="vertical"
+    android:background="@drawable/landscape">
+
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/_20ssp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Settings"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDisplayName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Settings"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold" />
+
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/ivProfilePic"
+                android:layout_width="@dimen/_100ssp"
+                android:layout_height="@dimen/_100ssp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/image0"
+                app:riv_corner_radius="@dimen/_40ssp"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <Switch
+                android:id="@+id/sTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_13sdp"
+                android:text="Themes"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_10ssp"
+                android:layout_gravity="center"/>
+
+            <EditText
+                android:id="@+id/inputUrl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/custom_edittext"
+                android:drawableLeft="@drawable/baseline_link_24"
+                android:drawablePadding="10dp"
+                android:hint="Server URL"
+                android:padding="10dp"
+                android:textSize="@dimen/_16sdp"
+
+                android:textColor="#ECECEC"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnApply"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Apply"
+                android:textStyle="bold"
+                app:backgroundTint="#26A69A" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:text="Logout"
+                android:textColor="#EF5350"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/noAccount"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

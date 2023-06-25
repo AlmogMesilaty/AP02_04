@@ -1,8 +1,8 @@
-package com.example.ap02_04.repositories;
+package com.example.ap02_04.room;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -14,15 +14,18 @@ import java.util.List;
 public interface MessageDao {
 
     @Query("SELECT * FROM message")
-    List<Message> getAll();
+    List<Message> getMessages();
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Message... messages);
 
     @Update
     void update(Message... messages);
 
-    @Delete
-    void delete(Message... messages);
+//    @Delete
+//    void delete(Message... messages);
+
+    @Query("DELETE FROM message")
+    void clear();
 
 }

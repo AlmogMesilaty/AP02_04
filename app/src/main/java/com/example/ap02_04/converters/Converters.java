@@ -36,13 +36,27 @@ public class Converters {
     }
 
     @TypeConverter
-    public static User fromString(String value) {
+    public static User toUserString(String value) {
         Type type = new TypeToken<User>() {}.getType();
         return gson.fromJson(value, type);
     }
 
     @TypeConverter
-    public static String toString(User user) {
-        return gson.toJson(user);
+    public static String toStringUser(User user) { return gson.toJson(user); }
+
+
+    @TypeConverter
+    public static Message toStringMessage(String value) {
+        Type type = new TypeToken<Message>() {}.getType();
+        return gson.fromJson(value, type);
     }
+
+    @TypeConverter
+    public static String toMessageString(Message message) {
+        return gson.toJson(message);
+    }
+
+
 }
+
+

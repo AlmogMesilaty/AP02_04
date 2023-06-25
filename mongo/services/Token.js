@@ -1,4 +1,5 @@
 import { Token } from '../models/token.js';
+import { FcmToken } from '../models/FcmToken.js'
 import jwt from "jsonwebtoken";
 
 // POST - api/Tokens
@@ -17,4 +18,13 @@ const CreateToken = async (username) => {
   return token;
 }
 
-export { CreateToken };
+// POST - api/Tokens/FCM
+const CreateFcmToken = async(fcmToken ) => {
+  const newFcmToken = new FcmToken({
+    fcmToken : fcmToken
+  })
+  await newFcmToken.save();
+  return newFcmToken;
+}
+
+export { CreateToken, CreateFcmToken };

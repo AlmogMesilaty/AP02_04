@@ -3,5 +3,27 @@
     <string name="hintSearch">Search</string>
     <string name="settings_title">Settings</string>
     <string name="add_chat_title">Add Chat</string>
+
+
+
+    <string name="sign_open_msg_01">Welcome Back!</string>
+    <string name="sign_open_msg_02">Don\'t have an account?</string>
+    <string name="sign_email_address">Email</string>
+    <string name="sign_password">Password</string>
+
+
+    <string name="welcome">Welcome</string>
+    <string name="email_address">Email</string>
+    <string name="password">Password</string>
+    <string name="display_name">Display Name</string>
+    <string name="login">Login</string>
+    <string name="RegPasswordHint">password</string>
+    <string name="RegUsernameHint">email@example.com</string>
+    <string name="login_to_continue">Login to continue</string>
+
     <string name="BaseUrl">http://10.0.2.2:5000/api/</string>
+
+    <string name="msg_token_fmt">FCM Token: %1$s</string>
+
+
 </resources>
