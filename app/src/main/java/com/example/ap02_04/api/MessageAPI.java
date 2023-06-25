@@ -74,10 +74,7 @@ public class MessageAPI {
         call.enqueue(new Callback<Message>() {
             @Override
             public void onResponse(Call<Message> call, Response<Message> response) {
-                // call get messages to update the messages after adding new one
-//                new Thread(() -> {
-//                    getMessages(messages);
-//                }).start();
+//                WebChat.setIsUpdated(true);
             }
 
             @Override

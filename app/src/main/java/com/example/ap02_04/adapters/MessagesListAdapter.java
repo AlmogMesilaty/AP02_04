@@ -21,7 +21,7 @@ public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapte
 
     private Message current;
     private int currentPosition = 0;
-
+    private int count;
 
     class MessageViewHolder extends RecyclerView.ViewHolder {
 
@@ -30,11 +30,9 @@ public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapte
 
         private MessageViewHolder(View itemView) {
             super(itemView);
-//            currentPosition = 0;
             tvSentContent = itemView.findViewById(R.id.tvSentContent);
             tvReceivedContent = itemView.findViewById(R.id.tvReceivedContent);
         }
-
     }
 
 
@@ -42,22 +40,31 @@ public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapte
         mInflater = LayoutInflater.from(context);
     }
 
-    @Override
-    public MessageViewHolder onCreateViewHolder(ViewGroup parent, int position) {
+    // Define view type constants
+    private static final int VIEW_TYPE_SENT_MESSAGE = 1;
+    private static final int VIEW_TYPE_RECEIVED_MESSAGE = 2;
 
-        if (messages != null) {
-            current = messages.get(currentPosition);
-            currentPosition = (currentPosition + 1) % 3;
-            View viewItem;
-            if (current.getSender().getUsername().equals(WebChat.getUsername())) {
-                viewItem = mInflater.inflate(R.layout.sent_message_layout, parent, false);
-            } else {
-                viewItem = mInflater.inflate(R.layout.received_message_layout, parent, false);
-            }
-            return new MessageViewHolder(viewItem);
+    @Override
+    public MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View viewItem;
+        if (viewType == VIEW_TYPE_SENT_MESSAGE) {
+            viewItem = mInflater.inflate(R.layout.sent_message_layout, parent, false);
+        } else {
+            viewItem = mInflater.inflate(R.layout.received_message_layout, parent, false);
         }
-        return null;
+        return new MessageViewHolder(viewItem);
     }
+
+    @Override
+    public int getItemViewType(int position) {
+        Message message = messages.get(position);
+        if (message.getSender().getUsername().equals(WebChat.getUsername())) {
+            return VIEW_TYPE_SENT_MESSAGE;
+        } else {
+            return VIEW_TYPE_RECEIVED_MESSAGE;
+        }
+    }
+
 
     @Override
     public void onBindViewHolder(MessagesListAdapter.MessageViewHolder holder, int position) {
@@ -84,7 +91,7 @@ public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapte
 
     public void setMessages(List<Message> s) {
         messages = s;
-        //notifyDataSetChanged();
+//        notifyDataSetChanged();
     }
 
     @Override

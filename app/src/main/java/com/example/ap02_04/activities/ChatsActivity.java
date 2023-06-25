@@ -55,7 +55,6 @@ public class ChatsActivity extends AppCompatActivity implements ChatsListInterfa
         adapter = new ChatsListAdapter(this, this);
         lstChats.setAdapter(adapter);
         lstChats.setLayoutManager(new LinearLayoutManager(this));
-        lstChats.getItemAnimator().setRemoveDuration(1);
 
         btnSettings = findViewById(R.id.btnSettings);
         btnAdd = findViewById(R.id.btnAdd);

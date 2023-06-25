@@ -1,5 +1,7 @@
 package com.example.ap02_04.repositories;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;
 
@@ -68,6 +70,7 @@ public class MessagesRepository {
     public MessageListData addMessage(final NewMessage newMessage) {
 
         Thread thread1 = new Thread(() -> {
+//            WebChat.setIsUpdated(false);
             messageAPI.addMessage(newMessage, messageListData);
         });
         thread1.start();
@@ -75,6 +78,10 @@ public class MessagesRepository {
             thread1.join();
         } catch (InterruptedException e) {
             return null;
+        }
+
+        for (int i = 0; i < 1000; i++) {
+            Log.i("Adding Message","Wating..");
         }
 
         Thread thread2 = new Thread(() -> {
