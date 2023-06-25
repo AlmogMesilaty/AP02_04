@@ -9,49 +9,6 @@
     android:orientation="vertical"
     android:background="@drawable/landscape">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/contactDetails"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="0dp"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="horizontal">
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <ImageButton
-                android:id="@+id/btnBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@color/icon_background"
-                android:src="@drawable/ic_back"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="@string/settings_title"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                android:textColor="@color/primary"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btnBack"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.card.MaterialCardView>
 
 
     <com.google.android.material.card.MaterialCardView
@@ -72,14 +29,24 @@
             android:orientation="vertical"
             android:padding="@dimen/_20ssp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Settings"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvDisplayName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="WebChat"
-                android:textColor="@color/primary_text"
-                android:textSize="@dimen/_18ssp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Settings"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/_12ssp"
                 android:textStyle="bold" />
 
 
@@ -128,7 +95,8 @@
                 android:layout_height="@dimen/_50sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:text="Apply"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                app:backgroundTint="#26A69A" />
 
 
             <com.google.android.material.textview.MaterialTextView

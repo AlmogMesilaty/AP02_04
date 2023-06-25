@@ -9,50 +9,6 @@
     android:orientation="vertical"
     android:background="@drawable/landscape">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/contactDetails"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:cardBackgroundColor="#373737"
-        app:cardCornerRadius="0dp"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <ImageButton
-                android:id="@+id/btnBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="#373737"
-                android:src="@drawable/ic_back_light"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="@string/settings_title"
-                android:textColor="@color/primary"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btnBack"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.card.MaterialCardView>
 
 
     <com.google.android.material.card.MaterialCardView
@@ -73,14 +29,24 @@
             android:orientation="vertical"
             android:padding="@dimen/_20ssp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Settings"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvDisplayName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="WebChat"
-                android:textColor="@color/primary_text"
-                android:textSize="@dimen/_18ssp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Settings"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/_12ssp"
                 android:textStyle="bold" />
 
 
@@ -89,14 +55,13 @@
                 android:layout_width="@dimen/_100ssp"
                 android:layout_height="@dimen/_100ssp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:background="#373737"
                 android:src="@drawable/image0"
+                app:riv_corner_radius="@dimen/_40ssp"
+                android:layout_marginTop="@dimen/_20sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:riv_corner_radius="@dimen/_40ssp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <Switch
@@ -121,7 +86,7 @@
                 android:padding="10dp"
                 android:textSize="@dimen/_16sdp"
 
-                android:textColor="@color/black"
+                android:textColor="#ECECEC"
                 android:layout_marginTop="@dimen/_10sdp"/>
 
             <com.google.android.material.button.MaterialButton
@@ -136,13 +101,13 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvLogout"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Logout"
-                android:textColor="@color/error"
-                android:textSize="@dimen/_12ssp"
+                android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_16sdp"
+                android:text="Logout"
+                android:textColor="#EF5350"
+                android:textSize="@dimen/_12ssp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/noAccount"

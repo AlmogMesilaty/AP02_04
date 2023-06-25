@@ -101,7 +101,8 @@
                 android:layout_height="@dimen/_50sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:text="Add chat"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                app:backgroundTint="@color/primary" />
 
         </LinearLayout>
 

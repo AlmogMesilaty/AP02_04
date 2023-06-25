@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Patterns;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -23,7 +22,6 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    ImageButton btnBack;
     MaterialTextView tvDisplayName;
     RoundedImageView ivProfilePic;
     MaterialTextView tvLogout;
@@ -36,7 +34,6 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        btnBack = findViewById(R.id.btnBack);
         tvLogout = findViewById(R.id.tvLogout);
         sTheme = findViewById(R.id.sTheme);
         inputUrl = findViewById(R.id.inputUrl);
@@ -48,10 +45,6 @@ public class SettingsActivity extends AppCompatActivity {
             loadUserDetails();
         }
 
-        btnBack.setOnClickListener(v -> {
-            Intent intent = new Intent(this, ChatsActivity.class);
-            startActivity(intent);
-        });
 
         tvLogout.setOnClickListener(v -> {
             WebChat.setToken(null);

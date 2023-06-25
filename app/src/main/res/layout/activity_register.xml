@@ -106,14 +106,14 @@
                     android:layout_marginTop="@dimen/_16sdp"/>
 
 
-
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnRegister"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_50sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:text="Save"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    app:backgroundTint="@color/primary" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvLogin"

@@ -219,7 +219,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<FcmToken> call, Response<FcmToken> response) {
                 if (response.isSuccessful() && response.body().getFcmToken() != null) {
-                    showToast(response.body().getFcmToken());
+//                    showToast(response.body().getFcmToken());
                 } else {
                     showToast(response.message());
                 }
