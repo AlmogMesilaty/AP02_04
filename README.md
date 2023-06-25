@@ -1,46 +1,62 @@
+Sure! Here's the content formatted for a README file:
+
 # AP02_04
 
 This repository contains the assignments for the Advanced Programming 2 course of the 2022-23 academic year.
 
-## Part 1 - Android app client 
+## Part 1 - Android App Client
 
 ### Description
 
-Create android app of the chat app we build for web in assignment 3
+Create an Android app for the chat application that was built for the web in assignment 3.
 
-### Executing the program
+### Executing the Program
 
-```
-Through the IDE - using the play panel of Android Studio
+To run the Android app, follow these steps:
 
-```
+1. Open Android Studio.
+2. Select the project from the repository.
+3. Build and run the app using the play panel in Android Studio.
 
-## part 2 - RESTful API Integration
+## Part 2 - RESTful API Integration
 
-Using retrofit we translate the requests from object
+### Description
 
-### Executing the program
+Integrate the RESTful API using Retrofit to translate requests from objects.
 
-```
-npm start
-API Endpoint: http://localhost:5000
-MongoDB Connection: mongodb://localhost:27017
+### Executing the Program
 
-```
+To execute the program, follow these steps:
 
-## Part 3 - Push Notifications with firebase Cloud Messaging
+1. Make sure you have Node.js installed.
+2. Open the terminal and navigate to the project directory.
+3. Run the command `npm start` to start the program.
+4. The API endpoint will be available at `http://localhost:5000`.
+5. The MongoDB connection string is `mongodb://localhost:27017`.
 
-When user sends a message.
-Useres with devices witout their app open gets pust notification.
-Clicking on the notification opens the app.
+## Part 3 - Push Notifications with Firebase Cloud Messaging
 
-Key for the firebase service is hard coded to the server.
-In order to work with different firbase, key variable needs to be changed inside App.js file.
+### Description
 
-### Executing the program
+Implement push notifications using Firebase Cloud Messaging. When a user sends a message, users with devices that don't have the app open will receive push notifications. Clicking on the notification will open the app.
 
-```
-npm start
-API Endpoint: http://localhost:5000
+### Configuration
 
-```
+To configure the program for Firebase Cloud Messaging:
+
+1. Obtain a Firebase service key.
+2. Open the `App.js` file in the project.
+3. Replace the `key` variable with your Firebase service key.
+
+### Executing the Program
+
+To execute the program, follow these steps:
+
+1. Make sure you have Node.js installed.
+2. Open the terminal and navigate to the project directory.
+3. Run the command `npm start` to start the program.
+4. The API endpoint will be available at `http://localhost:5000`.
+
+Please note that you may need to adjust the API endpoint and other configuration details based on your specific setup.
+
+Feel free to modify and enhance the program as needed to meet your requirements.
