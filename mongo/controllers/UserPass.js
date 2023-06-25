@@ -1,5 +1,6 @@
 
 import { UserPass } from '../models/UserPass.js';
+import { FcmToken } from '../models/FcmToken.js';
 import { CreateToken, CreateFcmToken } from '../services/Token.js';
 
 
@@ -26,9 +27,21 @@ const createFcmToken = async(req, res) => {
   
   const { fcmToken } = req.body;
 
-  const newFcmToken = await CreateFcmToken(fcmToken);
+  const existingFcmToken = await FcmToken.findOne({ fcmToken: fcmToken });
 
-  res.status(200).json(newFcmToken);
+  if (existingFcmToken == null) {
+
+    const newFcmToken = await CreateFcmToken(fcmToken);
+
+    res.status(200).json(newFcmToken);
+
+  } else {
+
+      res.status(200).json(existingFcmToken);
+
+  }
+
+  
 
 };
 

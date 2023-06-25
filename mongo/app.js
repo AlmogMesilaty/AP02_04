@@ -93,7 +93,7 @@ io.on('connection', (socket) => {
         to : "",
         notification : {
           title : 'Message Received!',
-          body :  data.username + 'sent message on WebChat! Click And Join The FUN!'
+          body :  username + ' sent message on WebChat! Click And Join The FUN!'
         },
         data : {
           title : 'data title',

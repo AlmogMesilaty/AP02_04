@@ -18,7 +18,9 @@ public class WebChat extends Application {
     public static Chat chat;
     public static String BaseUrl;
     public static LocalDatabase db;
+    public static boolean isNight;
     public static boolean isUpdated;
+
 
 
     public void onCreate() {
@@ -70,11 +72,11 @@ public class WebChat extends Application {
 
     public static void setDb(LocalDatabase db) { WebChat.db = db; }
 
-    public static boolean isIsUpdated() {
-        return isUpdated;
-    }
+    public static boolean isIsUpdated() { return isUpdated; }
 
-    public static void setIsUpdated(boolean isUpdated) {
-        WebChat.isUpdated = isUpdated;
-    }
+    public static void setIsUpdated(boolean isUpdated) { WebChat.isUpdated = isUpdated; }
+
+    public static boolean isNight() { return isNight; }
+
+    public static void setIsNight(boolean isNight) { WebChat.isNight = isNight; }
 }

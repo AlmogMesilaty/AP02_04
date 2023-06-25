@@ -70,11 +70,13 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         // handle theme change
-        sTheme.setOnCheckedChangeListener((compoundButton, b) -> {
-            if (b) {
+        sTheme.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                WebChat.setIsNight(true);
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                WebChat.setIsNight(false);
             }
         });
     }
@@ -104,12 +106,12 @@ public class SettingsActivity extends AppCompatActivity {
         ivProfilePic.setImageBitmap(bitmap);
     }
 
-    // remove eye flickers
-    public void recreate() {
-        finish();
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-        startActivity(getIntent());
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-    }
+//    // remove eye flickers
+//    public void recreate() {
+//        finish();
+//        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//        startActivity(getIntent());
+//        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//    }
 
 }
