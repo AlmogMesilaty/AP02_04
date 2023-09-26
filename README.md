@@ -1,4 +1,3 @@
-Sure! Here's the content formatted for a README file:
 
 # AP02_04
 
